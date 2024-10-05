@@ -1,0 +1,22 @@
+services:
+  php-fpm-82:
+   restart: always
+   container_name: php-fpm-82
+   image: php-fpm-82
+   volumes:
+     - "${SHARED_FOLDER_DIR}:/app"
+   networks:
+     - webserver_network
+     - db_network
+   logging:
+     driver: "json-file"
+     options:
+       max-size: "2m"
+       max-file: "1"
+networks:
+  webserver_network:
+    external:
+      name: docker-php-apache_webserver_network
+  db_network:
+    external:
+      name: docker-mysql_db_network
